@@ -1,0 +1,53 @@
+.appWrapper {
+  border: 1px solid black;
+  width: 400px;
+  height: 500px;
+  display: grid;
+  grid-template-columns: 56% 17% 27% ; 
+  grid-template-rows: 18% 78% ;
+  grid-template-areas: 
+  'numberArea numberArea history'
+  'numbers  operands history';
+  grid-gap: 0vw;
+}
+
+.numberArea {
+  grid-area: numberArea;
+}
+.numberArea textarea{
+  width: 97%;
+  height: 90%;
+  border: 2px solid black;
+  font-size: 40px;
+  text-align: right;
+}
+.numbers {
+  grid-area: numbers;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr ; 
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  
+}
+.numbers button {
+  box-sizing: inherit;
+  font-size: 30px;
+}
+.operands {
+  grid-area: operands;
+  display: flex;
+  flex-direction: column;
+}
+.operands button {
+  flex-grow: 1;
+  font-size: 30px;
+}
+.history {
+  grid-area: history;
+  background-color: ivory;
+}
+.historyHeader {
+
+}
+.historyEl {
+
+}
