@@ -13,7 +13,6 @@ const [history, setHistory] = useState([])
 
 
   const addNumberArea = (event) => {
-    
     let newsymbol = event.currentTarget.name
     if (newsymbol === '+' || newsymbol === '-' || newsymbol === '*' || newsymbol === '/' || newsymbol === '^') {
       return (
@@ -24,11 +23,11 @@ const [history, setHistory] = useState([])
     if (operator) {
       return (
         setNumberArea(numberArea + newsymbol),
-        setSecondArg(Number(secondArg + newsymbol))
+        setSecondArg(secondArg + newsymbol)
       )
     }
     setNumberArea(numberArea + newsymbol)
-    setFirstArg(Number(firstArg + newsymbol))
+    setFirstArg(firstArg + newsymbol)
   }
 
 
@@ -36,16 +35,16 @@ const [history, setHistory] = useState([])
     let result = null;
     switch(operator) {
       case ('+') :
-        result = firstArg+secondArg;
+        result = +firstArg + +secondArg;
         break
       case ('-') :
-        result = firstArg-secondArg;
+        result = +firstArg - +secondArg;
         break
       case ('*') :
-        result = firstArg*secondArg;
+        result = +firstArg * +secondArg;
         break
       case ('/') :
-        result = firstArg/secondArg;
+        result = +firstArg / +secondArg;
         break
       case ('^') :
         result = Math.pow(firstArg, secondArg);
@@ -54,7 +53,12 @@ const [history, setHistory] = useState([])
         alert ('Оператор отсутствует')
         result = firstArg
     }
-    return result
+    if (Math.round(result) === result) {
+      return result
+    } else {
+      return Number(result.toFixed(8))
+    }
+    
   }
 
 
