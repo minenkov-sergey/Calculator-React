@@ -15,10 +15,14 @@ const [history, setHistory] = useState([])
   const addNumberArea = (event) => {
     let newsymbol = event.currentTarget.name
     if (newsymbol === '+' || newsymbol === '-' || newsymbol === '*' || newsymbol === '/' || newsymbol === '^') {
-      return (
+      if (newsymbol === operator) {
+        calculateResult()
+      } else {
+        return (
         setNumberArea(numberArea + newsymbol),
         setOperator(newsymbol)
-      )
+      )}
+      
     }
     if (operator) {
       return (
@@ -26,6 +30,7 @@ const [history, setHistory] = useState([])
         setSecondArg(secondArg + newsymbol)
       )
     }
+
     setNumberArea(numberArea + newsymbol)
     setFirstArg(firstArg + newsymbol)
   }
