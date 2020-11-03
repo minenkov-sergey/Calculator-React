@@ -1,36 +1,41 @@
 .appWrapper {
-  border: 1px solid black;
-  width: 400px;
-  height: 500px;
+  margin: 5px;
+  width: 500px;
   display: grid;
-  grid-template-columns: 56% 17% 27% ; 
-  grid-template-rows: 18% 78% ;
+  grid-template-columns: 60% 20% 20% ; 
+  grid-template-rows: 20% 80% ;
   grid-template-areas: 
   'numberArea numberArea history'
   'numbers  operands history';
-  grid-gap: 0vw;
+  grid-gap: 2px;
+  background-color: rgb(241, 240, 240);
+  border-radius: 5px;
 }
 
 .numberArea {
   grid-area: numberArea;
+  margin: 3px 0px;
+  margin-left: 2px;
 }
 .numberArea textarea{
-  width: 97%;
-  height: 90%;
-  border: 2px solid black;
+  width: 98%;
+  height: 95%;
   font-size: 40px;
   text-align: right;
+  color: black;
+  background-color: ;
 }
 .numbers {
   grid-area: numbers;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr ; 
   grid-template-rows: 1fr 1fr 1fr 1fr;
-  
 }
 .numbers button {
   box-sizing: inherit;
   font-size: 30px;
+  margin: 2px;
+  font-family: Roboto
 }
 .operands {
   grid-area: operands;
@@ -40,14 +45,21 @@
 .operands button {
   flex-grow: 1;
   font-size: 30px;
+  margin: 1px;
+  font-family: Roboto
 }
 .history {
   grid-area: history;
-  background-color: ivory;
+  background-color: rgb(241, 240, 240);
+  border-radius: 4px;
 }
 .historyHeader {
-
+  font-family: Roboto;
+  margin: 5px;
+  border-bottom: solid 1px black;
+  
 }
 .historyEl {
-
+  font-family: Roboto;
+  margin-left: 10px
 }

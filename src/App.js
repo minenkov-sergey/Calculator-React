@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import style from './App.module.css';
+import Button  from '@material-ui/core/Button'
 
 
 const App = (props) => {
@@ -12,8 +13,9 @@ const [history, setHistory] = useState([])
 
 
   const addNumberArea = (event) => {
-    let newsymbol = event.target.value
-    if (newsymbol === '+' || newsymbol === '-' || newsymbol === '*' || newsymbol === '/') {
+    
+    let newsymbol = event.currentTarget.name
+    if (newsymbol === '+' || newsymbol === '-' || newsymbol === '*' || newsymbol === '/' || newsymbol === '^') {
       return (
         setNumberArea(numberArea + newsymbol),
         setOperator(newsymbol)
@@ -49,8 +51,8 @@ const [history, setHistory] = useState([])
         result = Math.pow(firstArg, secondArg);
         break
       default:
-        console.log ('Оператор отсутствует')
-        return
+        alert ('Оператор отсутствует')
+        result = firstArg
     }
     return result
   }
@@ -61,7 +63,7 @@ const [history, setHistory] = useState([])
     setFirstArg(newResult)
     setSecondArg('')
     setOperator('')
-    setHistory([...history, `${firstArg} ${operator} ${secondArg} = ${newResult}`])
+    if (secondArg) {setHistory([...history, `${firstArg} ${operator} ${secondArg} = ${newResult}`])}
     setNumberArea(newResult)
   }
 
@@ -86,34 +88,33 @@ const [history, setHistory] = useState([])
 
   return (
     <div className={style.appWrapper}>
-      {console.log ('Render')}
       <div className={style.numberArea} >
-        <textarea id='numberArea' value={numberArea}>0</textarea>
+        <textarea  id='numberArea' value={numberArea}>0</textarea>
       </div>
       <div className={style.operands} >
-        <button onClick={addNumberArea} value='+' id='but+'>+</button>
-        <button onClick={addNumberArea} value='-' id='but*'>-</button>
-        <button onClick={addNumberArea} value='*' id='but*'>*</button>
-        <button onClick={addNumberArea} value='/' id='but/'>/</button>
-        <button onClick={addNumberArea} value='^' id='but/'>^</button>
-        <button onClick={calculateResult} value='=' id='but='>=</button>
+        <Button variant='contained' color='primary' onClick={addNumberArea} name='+' id='but+'>+</Button>
+        <Button variant='contained' color='primary' onClick={addNumberArea} name='-' id='but*'>-</Button>
+        <Button variant='contained' color='primary' onClick={addNumberArea} name='*' id='but*'>*</Button>
+        <Button variant='contained' color='primary' onClick={addNumberArea} name='/' id='but/'>/</Button>
+        <Button variant='contained' color='primary' onClick={addNumberArea} name='^' id='but/'>^</Button>
+        <Button variant='contained' color='primary' onClick={calculateResult} name='=' id='but='>=</Button>
       </div>
       <div className={style.numbers} >
-          <button onClick={addNumberArea} value='1' id='but1'>1</button>
-          <button onClick={addNumberArea} value='2' id='but2'>2</button>
-          <button onClick={addNumberArea} value='3' id='but3'>3</button>
+          <Button variant='contained' color='primary' onClick={addNumberArea} name='1' id='but1'>1</Button>
+          <Button variant='contained' color='primary' onClick={addNumberArea} name='2' id='but2'>2</Button>
+          <Button variant='contained' color='primary' onClick={addNumberArea} name='3' id='but3'>3</Button>
         
-          <button onClick={addNumberArea} value='4' id='but4'>4</button>
-          <button onClick={addNumberArea} value='5' id='but5'>5</button>
-          <button onClick={addNumberArea} value='6' id='but6'>6</button>
+          <Button variant='contained' color='primary' onClick={addNumberArea} name='4' id='but4'>4</Button>
+          <Button variant='contained' color='primary' onClick={addNumberArea} name='5' id='but5'>5</Button>
+          <Button variant='contained' color='primary' onClick={addNumberArea} name='6' id='but6'>6</Button>
         
-          <button onClick={addNumberArea} value='7' id='but7'>7</button>
-          <button onClick={addNumberArea} value='8' id='but8'>8</button>
-          <button onClick={addNumberArea} value='9' id='but9'>9</button>
+          <Button variant='contained' color='primary' onClick={addNumberArea} name='7' id='but7'>7</Button>
+          <Button variant='contained' color='primary' onClick={addNumberArea} name='8' id='but8'>8</Button>
+          <Button variant='contained' color='primary' onClick={addNumberArea} name='9' id='but9'>9</Button>
         
-          <button onClick={addNumberArea} value='.' id='but.'>.</button>
-          <button onClick={addNumberArea} value='0' id='but0'>0</button>
-          <button onClick={clearNumberArea} value='' id='butClear'>AC</button>
+          <Button variant='contained' color='primary' onClick={addNumberArea} name='.' id='but.'>.</Button>
+          <Button variant='contained' color='primary' onClick={addNumberArea} name='0' id='but0'>0</Button>
+          <Button variant='contained' color='primary' onClick={clearNumberArea} name='' id='butClear'>AC</Button>
         </div>
         <div className={style.history}> 
           <div className={style.historyHeader}>History of Calculations</div>
