@@ -7,16 +7,16 @@ import CalculatorBody from './AppBody/CalculatorBody'
 const App = (props) => {
 
   
-  const [menu, menuToggle] = useState('')
-
+  const [menu, menuSelector] = useState('')
+  const [meme, memeToggle] = useState(false)
 
   
 
 
   return (
     <div className={style.appWrapper}>
-      <Navbar menuToggle={menuToggle} />
-      <CalculatorBody menu={menu}/>
+      <Navbar menuSelector={menuSelector} memeToggle={memeToggle} meme={meme}/>
+      <CalculatorBody menu={menu} meme={meme}/>
 
       </div>
 

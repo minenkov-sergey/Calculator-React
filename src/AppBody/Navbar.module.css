@@ -15,7 +15,10 @@
     border: solid blue 2px;
     border-radius: 4px;
   }
-  .navbarMeme {
+  .navbarMemeOff {
+    background-color: red;
+  }
+  .navbarMemeOn {
     justify-self: flex-end;
-    border: solid blue 2px;
+    background-color: green;
   }

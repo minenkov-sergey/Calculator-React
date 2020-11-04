@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './Navbar.module.css';
-import SimpleCalculator from './SimpleCalculator/SimpleCalculator';
+import SimpleCalculator from './Sapper/Sapper';
 
 
 const Navbar = (props) => {
@@ -12,18 +12,17 @@ const Navbar = (props) => {
         <div className={style.navbarHeader} >
           Navbar Header
         </div>
-        <div className={style.navbarEl} onClick={() => {props.menuToggle('menu1')}}>
+        <div className={style.navbarEl} onClick={() => {props.menuSelector('menu1')}}>
           SimpleCalculator
         </div>
-        <div className={style.navbarEl} onClick={() => {props.menuToggle('menu2')}}>
+        <div className={style.navbarEl} onClick={() => {props.menuSelector('menu2')}}>
           Menu2
         </div>
-        <div className={style.navbarEl} onClick={() => {props.menuToggle('menu3')}}>
+        <div className={style.navbarEl} onClick={() => {props.menuSelector('menu3')}}>
           Menu3
         </div>
-        <div className={style.navbarMeme} onClick={() => {props.menuToggle('meme')}}>
-          MeMe
-        </div>
+        {props.meme? <button className={style.navbarMemeOn} onClick={() => {props.memeToggle(!props.meme)}}> Memes: On </button>
+                    : <button className={style.navbarMemeOff} onClick={() => {props.memeToggle(!props.meme)}}>Memes: Off</button>}
       </div>
     )
 }
