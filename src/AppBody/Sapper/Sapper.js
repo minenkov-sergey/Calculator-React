@@ -8,12 +8,12 @@ const Sapper = (props) => {
 
   const [board, setBoard] = useState([])
   const [playerBoard, setPlayerBoard] = useState([])
-  const [flags, setFlag] = useState(0)
+  const [flags, setFlag] = useState()
   const [bombs, setBombs] = useState()
 
 
   let boardCopy = []
-  const generateboardCopy = () => {
+  const generateboard = () => {
     setBoard([])
     generateBombs()
     generateHintsOfBombs()
@@ -27,9 +27,9 @@ const Sapper = (props) => {
       let newArr = []
       for (let j = 0; j < 10; j++) {
         let random = Math.random()
-        if (random <= 0.05) {
+        if (random <= 0.1) {
           newArr = [...newArr, 'B']
-          bombsCount +=1
+          bombsCount += 1
         } else {
           newArr = [...newArr, 0]
         }
@@ -37,6 +37,7 @@ const Sapper = (props) => {
       boardCopy = [...boardCopy, newArr]
     }
     setBombs(bombsCount)
+    setFlag(bombsCount)
   }
 
   const generateHintsOfBombs = () => {
@@ -112,21 +113,15 @@ const Sapper = (props) => {
     let newArr = []
     let newBigArr = []
     for (let i = 0; i < 10; i++) {
-      
+
       for (let j = 0; j < 10; j++) {
         newArr = [...newArr, '']
       }
-      newBigArr = [...newBigArr, newArr ]
+      newBigArr = [...newBigArr, newArr]
       newArr = []
     }
     let emptyArr = [...newBigArr]
     return emptyArr
-  }
-
-
-  const playerLose = () => {
-    alert('you lose')
-    generateboardCopy()
   }
 
   const openTile = (event) => {
@@ -135,16 +130,68 @@ const Sapper = (props) => {
     let boardCopy = [...board]
     if (boardCopy[tileCoord[0]][tileCoord[1]] === 0) {
       playerBoardCopy[tileCoord[0]][tileCoord[1]] = 'C'
-      setPlayerBoard(playerBoardCopy)
-    } else {
-      playerBoardCopy[tileCoord[0]][tileCoord[1]] = 'C'
-      setPlayerBoard(playerBoardCopy)
-    }
+      let i = Number(tileCoord[0])
+      let j = Number(tileCoord[1])
+        if (i === 0 && j === 0) {
+          if (typeof boardCopy[i][j + 1] === 'number') { playerBoardCopy[i][j + 1] = 'C' }
+          if (typeof boardCopy[i + 1][j + 1] === 'number') { playerBoardCopy[i + 1][j + 1] = 'C' }
+          if (typeof boardCopy[i + 1][j] === 'number') { playerBoardCopy[i + 1][j] = 'C' }
+        } else if (i === 0 && j === 9) {
+            if (typeof boardCopy[i + 1][j] === 'number') { playerBoardCopy[i + 1][j] = 'C' }
+            if (typeof boardCopy[i + 1][j - 1] === 'number') { playerBoardCopy[i + 1][j - 1] = 'C' }
+            if (typeof boardCopy[i][j - 1] === 'number') { playerBoardCopy[i][j - 1] = 'C' }
+          } else if (i === 9 && j === 0) {
+              if (typeof boardCopy[i - 1][j] === 'number') { playerBoardCopy[i - 1][j] = 'C' }
+              if (typeof boardCopy[i - 1][j + 1] === 'number') { playerBoardCopy[i - 1][j + 1] = 'C' }
+              if (typeof boardCopy[i][j + 1] === 'number') { playerBoardCopy[i][j + 1] = 'C' }
+            } else if (i === 9 && j === 9) {
+                if (typeof boardCopy[i][j - 1] === 'number') { playerBoardCopy[i][j - 1] = 'C' }
+                if (typeof boardCopy[i - 1][j - 1] === 'number') { playerBoardCopy[i - 1][j - 1] = 'C' }
+                if (typeof boardCopy[i - 1][j] === 'number') { playerBoardCopy[i - 1][j] = 'C' }
+              } else if (i === 0) {
+                  if (typeof boardCopy[i][j + 1] === 'number') { playerBoardCopy[i][j + 1] = 'C' }
+                  if (typeof boardCopy[i + 1][j + 1] === 'number') { playerBoardCopy[i + 1][j + 1] = 'C' }
+                  if (typeof boardCopy[i + 1][j] === 'number') { playerBoardCopy[i + 1][j] = 'C' }
+                  if (typeof boardCopy[i + 1][j - 1] === 'number') { playerBoardCopy[i + 1][j - 1] = 'C' }
+                  if (typeof boardCopy[i][j - 1] === 'number') { playerBoardCopy[i][j - 1] = 'C' }
+                } else if (j === 9) {
+                    if (typeof boardCopy[i - 1][j - 1] === 'number') { playerBoardCopy[i - 1][j - 1] = 'C' }
+                    if (typeof boardCopy[i - 1][j] === 'number') { playerBoardCopy[i - 1][j] = 'C' }
+                    if (typeof boardCopy[i + 1][j] === 'number') { playerBoardCopy[i + 1][j] = 'C' }
+                    if (typeof boardCopy[i + 1][j - 1] === 'number') { playerBoardCopy[i + 1][j - 1] = 'C' }
+                    if (typeof boardCopy[i][j - 1] === 'number') { playerBoardCopy[i][j - 1] = 'C' }
+                  } else if (j === 0) {
+                      if (typeof boardCopy[i - 1][j] === 'number') { playerBoardCopy[i - 1][j] = 'C' }
+                      if (typeof boardCopy[i - 1][j + 1] === 'number') { playerBoardCopy[i - 1][j + 1] = 'C' }
+                      if (typeof boardCopy[i][j + 1] === 'number') { playerBoardCopy[i][j + 1] = 'C' }
+                      if (typeof boardCopy[i + 1][j + 1] === 'number') { playerBoardCopy[i + 1][j + 1] = 'C' }
+                      if (typeof boardCopy[i + 1][j] === 'number') { playerBoardCopy[i + 1][j] = 'C' }
+                    } else if (i === 9) {
+                        if (typeof boardCopy[i][j - 1] === 'number') { playerBoardCopy[i][j - 1] = 'C' }
+                        if (typeof boardCopy[i - 1][j - 1] === 'number') { playerBoardCopy[i - 1][j - 1] = 'C' }
+                        if (typeof boardCopy[i - 1][j] === 'number') { playerBoardCopy[i - 1][j] = 'C' }
+                        if (typeof boardCopy[i - 1][j + 1] === 'number') { playerBoardCopy[i - 1][j + 1] = 'C' }
+                        if (typeof boardCopy[i][j + 1] === 'number') { playerBoardCopy[i][j + 1] = 'C' }
+                      } else {
+                        if (typeof boardCopy[i - 1][j - 1] === 'number') { playerBoardCopy[i - 1][j - 1] = 'C' }
+                        if (typeof boardCopy[i - 1][j] === 'number') { playerBoardCopy[i - 1][j] = 'C' }
+                        if (typeof boardCopy[i - 1][j + 1] === 'number') { playerBoardCopy[i - 1][j + 1] = 'C' }
+                        if (typeof boardCopy[i][j + 1] === 'number') { playerBoardCopy[i][j + 1] = 'C' }
+                        if (typeof boardCopy[i + 1][j + 1] === 'number') { playerBoardCopy[i + 1][j + 1] = 'C' }
+                        if (typeof boardCopy[i + 1][j] === 'number') { playerBoardCopy[i + 1][j] = 'C' }
+                        if (typeof boardCopy[i + 1][j - 1] === 'number') { playerBoardCopy[i + 1][j - 1] = 'C' }
+                        if (typeof boardCopy[i][j - 1] === 'number') { playerBoardCopy[i][j - 1] = 'C' }
+                      }
+        setPlayerBoard(playerBoardCopy)
+  } else if (boardCopy[tileCoord[0]][tileCoord[1]] !== 0) {
+    playerBoardCopy[tileCoord[0]][tileCoord[1]] = boardCopy[tileCoord[0]][tileCoord[1]]
+    setPlayerBoard(playerBoardCopy)
   }
+  
+}
 
   const clickTileLB = (event) => {
     let boardCopy = [...board]
-    let clickedTile = Number(event.target.value)
     let tileCoord = event.target.name
     if (boardCopy[tileCoord[0]][tileCoord[1]] === 'B') {
       playerLose()
@@ -160,61 +207,55 @@ const Sapper = (props) => {
     let playerBoardCopy = [...playerBoard]
     let boardCopy = [...board]
 
-    if (flags <= 10) {
-      if (boardCopy[tileCoord[0]][tileCoord[1]] === 'B' && flags < 10) {
+    if (flags > 0) {
+      if (boardCopy[tileCoord[0]][tileCoord[1]] === 'B' && flags > 0) {
         boardCopy[tileCoord[0]][tileCoord[1]] = 'b'
         playerBoardCopy[tileCoord[0]][tileCoord[1]] = 'F'
         setBombs(bombs - 1)
         setBoard(boardCopy)
         setPlayerBoard(playerBoardCopy)
-        setFlag(flags + 1)
-      } else if (boardCopy[tileCoord[0]][tileCoord[1]] === 'b' && flags <= 10 ) {
+        setFlag(flags - 1)
+      } else if (boardCopy[tileCoord[0]][tileCoord[1]] === 'b' && flags > 0) {
         boardCopy[tileCoord[0]][tileCoord[1]] = 'B'
         playerBoardCopy[tileCoord[0]][tileCoord[1]] = ''
         setBombs(bombs + 1)
         setBoard(boardCopy)
         setPlayerBoard(playerBoardCopy)
-        setFlag(flags - 1)
-      } else if (playerBoardCopy[tileCoord[0]][tileCoord[1]] === 'F' && flags <= 10) {
+        setFlag(flags + 1)
+      } else if (playerBoardCopy[tileCoord[0]][tileCoord[1]] === 'F' && flags >= 0) {
         playerBoardCopy[tileCoord[0]][tileCoord[1]] = ''
         setPlayerBoard(playerBoardCopy)
-        setFlag(flags - 1)
-      } else if (flags < 10) {
+        setFlag(flags + 1)
+      } else if (flags > 0) {
         playerBoardCopy[tileCoord[0]][tileCoord[1]] = 'F'
         setPlayerBoard(playerBoardCopy)
-        setFlag(flags + 1)
+        setFlag(flags - 1)
       }
     } else {
       alert('too many flags')
     }
   }
 
-  const checkWinCondition = () => {
-    if (bombs === 0) {
-      alert('you win')
-    }
+  const playerWin = () => {
+    alert('you win')
   }
-  useEffect(() => { if (bombs === 0) { alert ('you win')} })
+  const playerLose = () => {
+    alert('you lose')
+    generateboard()
+  }
+  useEffect(() => { if (bombs === 0) { playerWin() } })
 
   return (
     <div className={style.calculator}>
-      <button onClick={generateboardCopy}></button>
+      <button onClick={generateboard}></button>
       <div className={style.tiles}>
         {playerBoard.map((t, i, row) => row[i].map((tile, j) =>
-          <button key={`${i}${j}`} name={`${i}${j}`} value={tile} onClick={clickTileLB} onContextMenu={clickTileRB}>{(playerBoard[i][j] === 'C' ? board[i][j] : '') || (playerBoard[i][j] === 'F' ? playerBoard[i][j] : '')}</button>)
+          <button  key={`${i}${j}`} name={`${i}${j}`} value={tile} onClick={clickTileLB} onContextMenu={clickTileRB}>{(playerBoard[i][j] === 'C' || typeof playerBoard[i][j] === 'number' ? board[i][j] : '') || (playerBoard[i][j] === 'F' ? 'F' : '') }</button>)
         )}
-      
+
         {board.map((t, i, row) => row[i].map((tile, j) =>
           <button key={`${i}${j}`} name={`${i}${j}`} value={tile} onClick={clickTileLB} onContextMenu={clickTileRB}>{tile}</button>)
         )}
-        </div>
-      {/* <div className={style.history}>
-        <div className={style.historyHeader}>History of Calculations</div>
-        <button onClick={generateboardCopy}></button>
-        {history.map(c => <div className={style.historyEl} onClick={''} value={c}> {c} </div>)}
-      </div> */}
-      <div>
-      
       </div>
     </div>
 
