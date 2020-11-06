@@ -1,6 +1,5 @@
 import React from 'react';
 import style from './Navbar.module.css';
-import SimpleCalculator from './Sapper/Sapper';
 
 
 const Navbar = (props) => {
