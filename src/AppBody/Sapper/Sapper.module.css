@@ -1,7 +1,9 @@
 .calculator {
   display: grid;
   grid-template-rows: 15% 85%;
-  grid-template-areas: 'numberArea numberArea' 'tiles tiles';
+  grid-template-areas: 
+  'numberArea numberArea' 
+  'tiles tiles';
   grid-gap: 2px;
   background-color: #99caff;
   margin-left: 10px;
@@ -19,7 +21,9 @@
   font-size: 20px;
   text-align: right;
   color: black;
-  background-color: rgb(250, 250, 250);
+  background-color: #eff7ff;
+  border-radius: 4px;
+  margin-left: 1px;
 }
 
 .tiles {
@@ -34,19 +38,26 @@
   width: 30px;
 }
 .tiles div {
-  height: 26px;
-  width: 26px;
+  height: 30px;
+  width: 30px;
 }
 
 .checked {
-  background-color: #99caff;
+  background-color: #6fb5ff;
   text-align: center;
-  border: solid 2px #007bff;
+  font-weight: bold;
+  font-size: 19px;
+  color: rgb(12, 57, 206);
+  border: solid 0px #007bff;
+  border-radius: 3px;
+  margin-left: 2px;
 }
 
 .flag {
-  height: 26px;
-  width: 26px;
+  height: 28px;
+  width: 28px;
+  padding: 1px;
+  padding-left: 2px;
 }
 
 .hidden {
@@ -55,7 +66,11 @@
   transition-property: background-color;
   transition-duration: .1s;
   color: white;
-  
+  padding: 0px;
+  border: 0px;
+  font-size: 0px;
+  font-family: 'Times New Roman', Times, serif;
+  margin-left: 2px;
 }
 
 .hidden:hover {

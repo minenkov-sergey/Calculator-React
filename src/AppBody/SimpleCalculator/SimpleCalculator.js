@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import style from './SimpleCalculator.module.css';
 
 
@@ -22,7 +22,6 @@ const SimpleCalculator = (props) => {
           setOperator(newsymbol)
         )
       }
-
     }
     if (operator) {
       return (
@@ -30,11 +29,9 @@ const SimpleCalculator = (props) => {
         setSecondArg(secondArg + newsymbol)
       )
     }
-
     setNumberArea(numberArea + newsymbol)
     setFirstArg(firstArg + newsymbol)
   }
-
 
   const calculate = () => {
     let result = null;
@@ -72,9 +69,7 @@ const SimpleCalculator = (props) => {
     } else {
       return Number(result.toFixed(8))
     }
-
   }
-
 
   const calculateResult = async () => {
     if (firstArg ==='.1235789.') {

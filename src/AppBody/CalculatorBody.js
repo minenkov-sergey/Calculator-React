@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import style from './CalculatorBody.module.css';
 import SimpleCalculator from './SimpleCalculator/SimpleCalculator.js'
 import Sapper from './Sapper/Sapper.js'
 
