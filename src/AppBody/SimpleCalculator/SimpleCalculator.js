@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import style from './SimpleCalculator.module.css';
 
 
@@ -9,6 +9,7 @@ const SimpleCalculator = (props) => {
   const [secondArg, setSecondArg] = useState('')
   const [operator, setOperator] = useState('')
   const [history, setHistory] = useState([])
+
 
   const addNumberArea = (event) => {
     let newsymbol = event.target.value
@@ -76,8 +77,14 @@ const SimpleCalculator = (props) => {
 
 
   const calculateResult = async () => {
+    if (firstArg ==='.1235789.') {
+      props.sapperToggle(true)
+      return
+    }
     let newResult = await calculate()
-    setFirstArg(newResult)
+    if (newResult !== 0) {
+      setFirstArg(newResult)
+    } else setFirstArg('')
     setSecondArg('')
     setOperator('')
     if (operator) { setHistory([`${firstArg} ${operator} ${secondArg} = ${newResult}`, ...history]) }
@@ -93,7 +100,6 @@ const SimpleCalculator = (props) => {
 
   const clickHistory = (event) => {
     let historyExpression = event.target.textContent
-    console.log(historyExpression)
     let equalityIndex = historyExpression.indexOf('=')
     let historyResult = Number(historyExpression.substring(equalityIndex + 2, historyExpression.length - 1))
     setFirstArg(historyResult)
@@ -102,12 +108,13 @@ const SimpleCalculator = (props) => {
     setNumberArea(historyResult)
   }
 
-
   return (
     <div className={style.calculator}>
         <div className={style.numberArea} >
-          <textarea id='numberArea' value={numberArea}>0</textarea>
+          <textarea id='numberArea' value={numberArea}></textarea>
         </div>
+        {/* delete div below */}
+        <div><button onClick={() => {props.sapperToggle(true)}}>Fun</button></div>
         <div className={style.buttons}>
           <button  onClick={addNumberArea} value='^' id='but^'>{'\u005E'}</button>
           <button onClick={addNumberArea} value={'\u221A'} id='butSq'>{'\u221A'}</button>
@@ -141,7 +148,7 @@ const SimpleCalculator = (props) => {
         </div>
         <div className={style.history}>
           <div className={style.historyHeader}>History of Calculations</div>
-          {history.map(c => <div className={style.historyEl} onClick={clickHistory} value={c}> {c} </div>)}
+          {history.map( (c, i) => <div key={i} className={style.historyEl} onClick={clickHistory} value={c}> {c} </div>)}
         </div>
       </div>
   )
