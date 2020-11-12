@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import SimpleCalculator from './SimpleCalculator/SimpleCalculator.js'
-import Sapper from './Sapper/Sapper.js'
 
 
 const CalculatorBody = (props) => {
 
-  const [sapper, sapperToggle] = useState(false)
+  const [menu, setMenu] = useState('menu1')
   
   return (
-    sapper? <Sapper sapper = {sapper} sapperToggle={sapperToggle} /> : <SimpleCalculator sapperToggle={sapperToggle} />
+     (menu ==='menu1')? <SimpleCalculator setMenu={setMenu}/> : null 
     )
 }
 

@@ -72,10 +72,6 @@ const SimpleCalculator = (props) => {
   }
 
   const calculateResult = async () => {
-    if (firstArg ==='.1235789.') {
-      props.sapperToggle(true)
-      return
-    }
     let newResult = await calculate()
     if (newResult !== 0) {
       setFirstArg(newResult)
@@ -108,8 +104,6 @@ const SimpleCalculator = (props) => {
         <div className={style.numberArea} >
           <textarea id='numberArea' value={numberArea}></textarea>
         </div>
-        {/* delete div below */}
-        <div><button onClick={() => {props.sapperToggle(true)}}>Fun</button></div>
         <div className={style.buttons}>
           <button  onClick={addNumberArea} value='^' id='but^'>{'\u005E'}</button>
           <button onClick={addNumberArea} value={'\u221A'} id='butSq'>{'\u221A'}</button>
